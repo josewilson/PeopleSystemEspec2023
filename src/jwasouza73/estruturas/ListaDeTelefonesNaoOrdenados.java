@@ -10,7 +10,7 @@ public class ListaDeTelefonesNaoOrdenados {
 	//controle do tamanho
 	private int tamanho;
 	//Capacidade inicial (pode ser alterada depois)
-	private static final int CAPACIDADE_PADRAO = 10;
+	private static final int CAPACIDADE_PADRAO = 3;
 	
 	//Construtor da lista
 	public ListaDeTelefonesNaoOrdenados() {
@@ -26,7 +26,7 @@ public class ListaDeTelefonesNaoOrdenados {
 	private void garantirCapacidade() {
 		int novaCapacidade = telefones.length * 2;
 		Telefone[] listaTelefones = new Telefone[novaCapacidade];
-		for(int i = 1; i < tamanho; i++) {
+		for(int i = 0; i < tamanho; i++) {
 			listaTelefones[i] = telefones[i];
 		}
 		telefones = listaTelefones;
@@ -62,11 +62,13 @@ public class ListaDeTelefonesNaoOrdenados {
 		int index  = buscarTelefoneIndex(telefone);
 		//validar se foi encontrado ou não, se foi encontrado o index será diferente de -1
 		if(index != -1) {
-			for (int i = index; i < tamanho; i++) {
+			for (int i = index; i < tamanho -1; i++) {
 				telefones[i] = telefones[i + 1];
 		}
-		//Pega o último elemento e coloca null nele, como também decrementa o tamanho (--tamanho é o mesmo que tamanho -1)
-		telefones[--tamanho] = null;
+		//Pega o último elemento e coloca null nele, 
+		//como também decrementa o tamanho (--tamanho é o mesmo que tamanho -1)
+		this.tamanho = tamanho -1;
+			telefones[tamanho] = null;
 	    }
 	}
 	
